@@ -10,7 +10,7 @@
             --card-bg: #1e1e1e;
             --text-color: #ffffff;
             --text-secondary: #aaaaaa;
-            --accent-color: #d4af37; /* Goldene Akzentfarbe */
+            --accent-color: #d4af37;
             --border-color: #333333;
         }
 
@@ -69,22 +69,37 @@
             margin-bottom: 25px;
         }
 
+        .section-title p.subtitle {
+            color: var(--accent-color);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
         .section-title h2 {
             font-size: 2rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin: 5px 0;
         }
 
-        .section-title p {
+        .section-title p.desc {
             color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         .releases-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
             margin-bottom: 50px;
+        }
+
+        @media (max-width: 900px) {
+            .releases-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .card {
@@ -101,6 +116,8 @@
             height: auto;
             border-radius: 6px;
             margin-bottom: 15px;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
         }
 
         .card-tag {
@@ -113,8 +130,9 @@
         }
 
         .card h3 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 5px;
+            text-transform: uppercase;
         }
 
         .card p {
@@ -124,11 +142,11 @@
 
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             border-radius: 6px;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             background-color: #000;
         }
 
@@ -168,13 +186,13 @@
 
     <main>
         <div class="section-title" id="releases">
-            <p style="color: var(--accent-color); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Musik & Produktionen</p>
+            <p class="subtitle">Musik & Produktionen</p>
             <h2>Selected Releases</h2>
-            <p>Hier können veröffentlichte Tracks, offizielle Cover und direkte Hörlinks ergänzt werden.</p>
+            <p class="desc">Hier können veröffentlichte Tracks, offizielle Cover und direkte Hörlinks ergänzt werden.</p>
         </div>
 
         <div class="releases-grid">
-            <!-- Cover/Projekt Card 1 -->
+            <!-- Karte 1: Album Cover -->
             <div class="card">
                 <img src="assets/from-germany-to-the-bay.jpg" alt="From Germany to the Bay Cover" onerror="this.onerror=null; this.src='assets/cover.jpg';">
                 <div class="card-tag">Upcoming Project</div>
@@ -182,34 +200,34 @@
                 <p>Ruhrpott Recordz - Coming soon</p>
             </div>
 
-            <!-- Nächster Release Platzhalter -->
+            <!-- Karte 2: Dein nächster Release -->
             <div class="card" style="justify-content: center; align-items: center; text-align: center; border: 1px dashed var(--border-color);">
                 <div style="font-size: 2rem; color: var(--accent-color); margin-bottom: 10px;">+</div>
                 <h3>Dein nächster Release</h3>
                 <p>Cover, Artist, Songtitel und offizieller Link hier ergänzen.</p>
             </div>
 
-            <!-- Weitere Produktionen (Videos) Card -->
+            <!-- Karte 3: Weitere Produktionen (Videos) -->
             <div class="card">
                 <div class="card-tag">Musikvideos & Features</div>
                 <h3 style="margin-bottom: 15px;">Weitere Produktionen</h3>
 
-                <!-- Video 1: Losing my Mind -->
-                <div style="margin-bottom: 20px;">
+                <!-- Video 1 -->
+                <div style="margin-bottom: 15px;">
                     <div class="video-container">
                         <iframe src="https://www.youtube.com/embed/8loUwMDXM0Q" title="MBNEL - Losing my Mind" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
-                    <p style="font-weight: bold; color: var(--text-color);">MBNEL - Losing my Mind</p>
-                    <p style="font-size: 0.8rem;">Produced by Ruhrpott-Recordz</p>
+                    <p style="font-weight: bold; color: var(--text-color); font-size: 0.85rem;">MBNEL - Losing my Mind</p>
+                    <p style="font-size: 0.75rem; color: var(--text-secondary);">Produced by Ruhrpott-Recordz</p>
                 </div>
 
-                <!-- Video 2: CLUTCH -->
+                <!-- Video 2 -->
                 <div>
                     <div class="video-container">
                         <iframe src="https://www.youtube.com/embed/02j4K4m6mS0" title="MBNEL - CLUTCH" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
-                    <p style="font-weight: bold; color: var(--text-color);">MBNEL - CLUTCH</p>
-                    <p style="font-size: 0.8rem;">Produced by Ruhrpott-Recordz</p>
+                    <p style="font-weight: bold; color: var(--text-color); font-size: 0.85rem;">MBNEL - CLUTCH</p>
+                    <p style="font-size: 0.75rem; color: var(--text-secondary);">Produced by Ruhrpott-Recordz</p>
                 </div>
             </div>
         </div>
