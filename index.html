@@ -1,312 +1,223 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#090909">
-  <meta name="description" content="Ruhrpott Recordz — Independent Hip-Hop aus dem Ruhrgebiet. From Germany to the Bay.">
-  <title>Ruhrpott Recordz — Built in the Pott. Heard Worldwide.</title>
-  <style>
-    :root {
-      --bg: #090909;
-      --panel: #111111;
-      --gold: #d99a24;
-      --gold-bright: #f1bd4d;
-      --cream: #eee7d8;
-      --muted: #a6a29a;
-      --line: rgba(217,154,36,.25);
-      --max: 1200px;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 86px; }
-    body {
-      margin: 0; background: var(--bg); color: var(--cream);
-      font-family: Inter, "Segoe UI", Arial, sans-serif; line-height: 1.6;
-      overflow-x: hidden;
-    }
-    body::before {
-      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 5;
-      opacity: .07; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
-    }
-    a { color: inherit; }
-    img { display: block; max-width: 100%; }
-    .wrap { width: min(var(--max), calc(100% - 40px)); margin-inline: auto; }
-    .topline { height: 3px; background: linear-gradient(90deg, #5c3b0b, var(--gold-bright), #6b4511); }
-    header {
-      position: sticky; top: 0; z-index: 20; background: rgba(9,9,9,.88);
-      backdrop-filter: blur(16px); border-bottom: 1px solid var(--line);
-    }
-    .nav { min-height: 76px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
-    .brand { text-decoration:none; font-weight:950; letter-spacing:.16em; font-size:.94rem; }
-    .brand span { color:var(--gold-bright); }
-    .nav-links { display:flex; align-items:center; gap:24px; }
-    .nav-links a { text-decoration:none; color:#d6d0c4; font-size:.78rem; text-transform:uppercase; letter-spacing:.11em; transition:color .2s; }
-    .nav-links a:hover { color:var(--gold-bright); }
-    .menu-toggle { display:none; background:none; color:var(--gold-bright); border:1px solid var(--line); padding:9px 12px; font-size:1.2rem; cursor:pointer; }
-    .hero { position:relative; min-height: min(780px, calc(100svh - 76px)); display:grid; align-items:end; isolation:isolate; overflow:hidden; }
-    .hero-bg { position:absolute; inset:0; z-index:-2; }
-    .hero-bg img { width:100%; height:100%; object-fit:cover; object-position:center 42%; }
-    .hero::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg,rgba(4,5,6,.88) 0%,rgba(4,5,6,.55) 48%,rgba(4,5,6,.08) 100%),linear-gradient(0deg,rgba(5,5,5,.88),transparent 60%); }
-    .hero-content { padding-block:100px 70px; }
-    .eyebrow { display:flex; align-items:center; gap:12px; color:var(--gold-bright); font-size:.72rem; letter-spacing:.25em; text-transform:uppercase; font-weight:800; }
-    .eyebrow::before { content:""; width:38px; height:1px; background:var(--gold-bright); }
-    h1 { max-width:800px; margin:20px 0 14px; font-size:clamp(3rem,8vw,7.2rem); line-height:.88; letter-spacing:-.065em; text-transform:uppercase; }
-    h1 span { display:block; color:var(--gold-bright); }
-    .hero p { max-width:560px; color:#d1ccc2; font-size:clamp(1rem,1.8vw,1.2rem); }
-    .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
-    .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:14px 19px; border:1px solid var(--gold); text-decoration:none; text-transform:uppercase; font-size:.76rem; font-weight:900; letter-spacing:.1em; transition:transform .2s,background .2s,color .2s; }
-    .btn:hover { transform:translateY(-3px); }
-    .btn.primary { background:var(--gold-bright); color:#100d07; }
-    .btn.secondary { background:rgba(0,0,0,.32); }
-    .hero-stamp { position:absolute; right:5%; bottom:34px; border:1px solid rgba(241,189,77,.65); border-radius:50%; width:112px; height:112px; display:grid; place-items:center; text-align:center; color:var(--gold-bright); font-size:.65rem; font-weight:900; line-height:1.35; letter-spacing:.12em; transform:rotate(12deg); }
-    .ticker { border-block:1px solid var(--line); background:#0e0e0e; overflow:hidden; }
-    .ticker-inner { display:flex; gap:30px; width:max-content; padding:15px 0; animation:marquee 28s linear infinite; color:#b9b1a3; font-size:.7rem; font-weight:800; letter-spacing:.22em; text-transform:uppercase; }
-    .ticker b { color:var(--gold-bright); }
-    @keyframes marquee { to { transform:translateX(-50%); } }
-    section { padding:100px 0; }
-    .section-head { display:flex; justify-content:space-between; align-items:end; gap:30px; margin-bottom:34px; }
-    .kicker { color:var(--gold-bright); font-size:.7rem; font-weight:900; letter-spacing:.24em; text-transform:uppercase; }
-    h2 { margin:8px 0 0; font-size:clamp(2rem,4.8vw,4rem); line-height:1; letter-spacing:-.045em; text-transform:uppercase; }
-    .section-head p { max-width:400px; color:var(--muted); margin:0; font-size:.95rem; }
-    .feature { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); border:1px solid var(--line); background:linear-gradient(135deg,#15130f,#0c0c0c 60%); }
-    .feature-art { position:relative; min-height:420px; overflow:hidden; }
-    .feature-art img { width:100%; height:100%; min-height:420px; object-fit:cover; transition:transform .6s; }
-    .feature:hover .feature-art img { transform:scale(1.035); }
-    .feature-copy { padding:clamp(28px,5vw,60px); display:flex; flex-direction:column; justify-content:center; align-items:flex-start; }
-    .status { border:1px solid var(--gold); color:var(--gold-bright); padding:6px 10px; font-size:.65rem; font-weight:900; letter-spacing:.18em; }
-    .feature-copy h3 { font-size:clamp(2.2rem,4.6vw,4.4rem); line-height:.92; margin:22px 0 16px; text-transform:uppercase; letter-spacing:-.055em; }
-    .feature-copy h3 span { color:var(--gold-bright); }
-    .feature-copy p { color:#bcb6ab; max-width:460px; }
-    .note { color:#81796b!important; font-size:.8rem; }
-    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center; }
-    .portrait { position:relative; }
-    .portrait img { width:100%; max-height:640px; object-fit:cover; object-position:center; filter:saturate(.75); }
-    .portrait::after { content:"MONROE / RUHRPOTT RECORDZ"; position:absolute; bottom:16px; left:16px; background:rgba(8,8,8,.82); border-left:3px solid var(--gold); padding:10px 13px; font-size:.65rem; letter-spacing:.14em; }
-    .about-copy p { color:#bcb6ab; }
-    .stats { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin-top:30px; }
-    .stat { padding:18px 12px 18px 0; }
-    .stat strong { display:block; color:var(--gold-bright); font-size:1.4rem; }
-    .stat span { color:var(--muted); font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; }
-    .release-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
-    .release { border:1px solid #29251d; background:#101010; transition:transform .25s,border-color .25s; }
-    .release:hover { transform:translateY(-5px); border-color:var(--gold); }
-    .release img { width:100%; aspect-ratio:1/1; object-fit:cover; }
-    .release-info { padding:17px; }
-    .release-info small { color:var(--gold-bright); letter-spacing:.14em; text-transform:uppercase; font-size:.62rem; font-weight:900; }
-    .release-info h3 { margin:7px 0 4px; text-transform:uppercase; font-size:1.05rem; }
-    .release-info p { color:var(--muted); font-size:.82rem; margin:0; }
-    .release.placeholder { display:flex; flex-direction:column; justify-content:center; min-height:250px; padding:25px; border-style:dashed; color:var(--muted); }
-    .release.placeholder .plus { font-size:2rem; color:var(--gold); }
-    .connections { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
-    .connection { border:1px solid #2a2822; padding:25px; background:linear-gradient(135deg,#141414,#0c0c0c); }
-    .connection .number { color:var(--gold); font-size:.7rem; letter-spacing:.2em; }
-    .connection h3 { margin:10px 0; font-size:1.25rem; text-transform:uppercase; }
-    .connection p { color:var(--muted); margin:0; font-size:.9rem; }
-    .socials { display:flex; flex-wrap:wrap; gap:12px; }
-    .socials a { text-decoration:none; border:1px solid #39342a; padding:14px 18px; font-weight:800; font-size:.8rem; text-transform:uppercase; letter-spacing:.08em; }
-    .socials a:hover { color:var(--gold-bright); border-color:var(--gold); }
-    .contact-band { padding:45px; border:1px solid var(--line); background:radial-gradient(ellipse at 100% 0%,rgba(217,154,36,.14),transparent 55%),#111; display:flex; justify-content:space-between; align-items:center; gap:25px; }
-    .contact-band h2 { font-size:clamp(1.8rem,4vw,3.3rem); }
-    footer { border-top:1px solid var(--line); padding:28px 0; color:#777166; font-size:.75rem; }
-    .footer-inner { display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
-    .reveal { opacity:0; transform:translateY(22px); transition:opacity .7s ease,transform .7s ease; }
-    .reveal.visible { opacity:1; transform:none; }
-    @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation:none!important; transition:none!important; } .reveal { opacity:1; transform:none; } }
-    @media (max-width:800px) {
-      .menu-toggle { display:block; }
-      .nav-links { display:none; position:absolute; top:100%; left:0; right:0; padding:12px 20px 20px; background:rgba(9,9,9,.98); border-bottom:1px solid var(--line); flex-direction:column; align-items:stretch; gap:0; }
-      .nav-links.open { display:flex; }
-      .nav-links a { padding:13px 0; border-bottom:1px solid #24211b; }
-      .hero { min-height:690px; }
-      .hero-bg img { object-position:53% center; }
-      .hero::before { background:linear-gradient(0deg,rgba(4,5,6,.96),rgba(4,5,6,.55) 65%,rgba(4,5,6,.1)); }
-      .hero-content { padding-block:100px 90px; }
-      .hero-stamp { width:84px; height:84px; font-size:.52rem; right:20px; bottom:20px; }
-      section { padding:72px 0; }
-      .section-head { display:block; }
-      .section-head p { margin-top:15px; }
-      .feature,.about-grid { grid-template-columns:1fr; }
-      .feature-art,.feature-art img { min-height:0; aspect-ratio:1/1; }
-      .about-grid { gap:30px; }
-      .release-grid { grid-template-columns:repeat(2,1fr); }
-      .contact-band { padding:28px; display:block; }
-      .contact-band .btn { margin-top:20px; }
-    }
-    @media (max-width:480px) {
-      .wrap { width:min(var(--max),calc(100% - 28px)); }
-      .brand { font-size:.75rem; letter-spacing:.1em; }
-      .hero { min-height:620px; }
-      .hero-content { padding-bottom:90px; }
-      .release-grid,.connections { grid-template-columns:1fr; }
-      .release.placeholder { min-height:180px; }
-      .stats { grid-template-columns:1fr; }
-      .stat { border-bottom:1px solid #29251d; }
-      .stat:last-child { border-bottom:0; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruhrpott Recordz</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #ffffff;
+            --text-secondary: #aaaaaa;
+            --accent-color: #d4af37; /* Goldene Akzentfarbe */
+            --border-color: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-color);
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            margin-bottom: 25px;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .releases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .card-tag {
+            color: var(--accent-color);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            background-color: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        footer {
+            max-width: 1200px;
+            margin: 60px auto 20px auto;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            letter-spacing: 2px;
+        }
+    </style>
 </head>
 <body>
-  <div class="topline"></div>
-  <header>
-    <nav class="nav wrap" aria-label="Hauptnavigation">
-      <a class="brand" href="#start">RUHRPOTT <span>RECORDZ</span></a>
-      <button class="menu-toggle" id="menuToggle" aria-label="Menü öffnen" aria-expanded="false">☰</button>
-      <div class="nav-links" id="navLinks">
-        <a href="#projekt">Projekt</a>
-        <a href="#monroe">Monroe</a>
-        <a href="#releases">Releases</a>
-        <a href="#connections">Connections</a>
-        <a href="#social">Socials</a>
-      </div>
-    </nav>
-  </header>
 
-  <main>
-    <section class="hero" id="start" style="padding:0">
-      <div class="hero-bg"><img src="assets/from-germany-to-the-bay.png" alt="From Germany to the Bay – Ruhrpott trifft San Francisco" fetchpriority="high"></div>
-      <div class="wrap hero-content">
-        <div class="eyebrow">Independent sound • Ruhrgebiet, Deutschland</div>
-        <h1>Built in the Pott.<span>Heard worldwide.</span></h1>
-        <p>Von den Zechen des Ruhrgebiets bis zur West Coast. Eine unabhängige Hip-Hop-Identität mit eigener Herkunft, eigenem Sound und internationalem Blick.</p>
-        <div class="actions">
-          <a class="btn primary" href="#projekt">Projekt entdecken <span aria-hidden="true">↘</span></a>
-          <a class="btn secondary" href="#monroe">Das Label kennenlernen</a>
+    <header>
+        <div class="logo">Ruhrpott Recordz</div>
+        <nav>
+            <a href="#projekt">Projekt</a>
+            <a href="#m2nroe">M2NROE</a>
+            <a href="#releases">Releases</a>
+            <a href="#connections">Connections</a>
+            <a href="#socials">Socials</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="section-title" id="releases">
+            <p style="color: var(--accent-color); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Musik & Produktionen</p>
+            <h2>Selected Releases</h2>
+            <p>Hier können veröffentlichte Tracks, offizielle Cover und direkte Hörlinks ergänzt werden.</p>
         </div>
-      </div>
-      <div class="hero-stamp" aria-label="Made in the Ruhrpott">MADE IN<br>THE<br>RUHRPOTT ★</div>
-    </section>
 
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker-inner">
-        <span><b>✦</b> Ruhrgebiet</span><span>Independent Hip-Hop</span><span><b>✦</b> From Germany to the Bay</span><span>Producer Culture</span><span><b>✦</b> West Coast Connection</span>
-        <span><b>✦</b> Ruhrgebiet</span><span>Independent Hip-Hop</span><span><b>✦</b> From Germany to the Bay</span><span>Producer Culture</span><span><b>✦</b> West Coast Connection</span>
-      </div>
-    </div>
+        <div class="releases-grid">
+            <!-- Cover/Projekt Card 1 -->
+            <div class="card">
+                <img src="assets/from-germany-to-the-bay.jpg" alt="From Germany to the Bay Cover" onerror="this.onerror=null; this.src='assets/cover.jpg';">
+                <div class="card-tag">Upcoming Project</div>
+                <h3>FROM GERMANY TO THE BAY</h3>
+                <p>Ruhrpott Recordz - Coming soon</p>
+            </div>
 
-    <section id="projekt">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div><div class="kicker">Das nächste Kapitel</div><h2>From Germany<br>to the Bay</h2></div>
-          <p>Eine visuelle Hommage an die Verbindung zwischen dem Ruhrgebiet und der San-Francisco-Bay-Area.</p>
+            <!-- Nächster Release Platzhalter -->
+            <div class="card" style="justify-content: center; align-items: center; text-align: center; border: 1px dashed var(--border-color);">
+                <div style="font-size: 2rem; color: var(--accent-color); margin-bottom: 10px;">+</div>
+                <h3>Dein nächster Release</h3>
+                <p>Cover, Artist, Songtitel und offizieller Link hier ergänzen.</p>
+            </div>
+
+            <!-- Weitere Produktionen (Videos) Card -->
+            <div class="card">
+                <div class="card-tag">Musikvideos & Features</div>
+                <h3 style="margin-bottom: 15px;">Weitere Produktionen</h3>
+
+                <!-- Video 1: Losing my Mind -->
+                <div style="margin-bottom: 20px;">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/8loUwMDXM0Q" title="MBNEL - Losing my Mind" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <p style="font-weight: bold; color: var(--text-color);">MBNEL - Losing my Mind</p>
+                    <p style="font-size: 0.8rem;">Produced by Ruhrpott-Recordz</p>
+                </div>
+
+                <!-- Video 2: CLUTCH -->
+                <div>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/02j4K4m6mS0" title="MBNEL - CLUTCH" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <p style="font-weight: bold; color: var(--text-color);">MBNEL - CLUTCH</p>
+                    <p style="font-size: 0.8rem;">Produced by Ruhrpott-Recordz</p>
+                </div>
+            </div>
         </div>
-        <article class="feature reveal">
-          <div class="feature-art"><img src="assets/from-germany-to-the-bay.png" alt="Artwork From Germany to the Bay"></div>
-          <div class="feature-copy">
-            <span class="status">COMING SOON · PROJEKT IN VORBEREITUNG</span>
-            <h3>Two coasts.<br><span>One vision.</span></h3>
-            <p>Industrieller Ruhrpott-Charakter trifft auf West-Coast-Atmosphäre. Das Artwork steht für ein kommendes Projekt von Ruhrpott Recordz.</p>
-            <p class="note">Noch kein Veröffentlichungstermin und kein Streaming-Link angekündigt.</p>
-            <a class="btn secondary" href="#social">Updates verfolgen <span aria-hidden="true">↗</span></a>
-          </div>
-        </article>
-      </div>
-    </section>
+    </main>
 
-    <section id="monroe">
-      <div class="wrap about-grid">
-        <div class="portrait reveal"><img src="assets/monroe-promo.png" alt="Dunkles Promo-Motiv im Hip-Hop-Lifestyle-Stil"></div>
-        <div class="about-copy reveal">
-          <div class="kicker">Producer / Label Identity</div>
-          <h2>Meet<br>Monroe.</h2>
-          <p>Ruhrpott Recordz steht für eine unabhängige musikalische Handschrift mit Wurzeln im Revier und einem Blick über Grenzen hinaus.</p>
-          <p>Hier entsteht der Platz für die Story hinter dem Namen, ausgewählte Produktionen und die Entwicklung des Labels – direkt, eigenständig und ohne unnötiges Gerede.</p>
-          <div class="stats">
-            <div class="stat"><strong>RUHRPOTT</strong><span>Heimat</span></div>
-            <div class="stat"><strong>HIP-HOP</strong><span>Sound</span></div>
-            <div class="stat"><strong>WORLDWIDE</strong><span>Vision</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <footer>
+        VON HIER BIS ÜBER DEN OZEAN &copy; RUHRPOTT RECORDZ
+    </footer>
 
-    <section id="releases">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div><div class="kicker">Musik & Produktionen</div><h2>Selected releases</h2></div>
-          <p>Hier können veröffentlichte Tracks, offizielle Cover und direkte Hörlinks ergänzt werden.</p>
-        </div>
-        <div class="release-grid">
-          <article class="release reveal">
-            <img src="assets/from-germany-to-the-bay.png" alt="From Germany to the Bay Cover">
-            <div class="release-info"><small>Upcoming project</small><h3>From Germany to the Bay</h3><p>Ruhrpott Recordz · Coming soon</p></div>
-          </article>
-          <article class="release placeholder reveal"><span class="plus">＋</span><h3>Dein nächster Release</h3><p>Cover, Artist, Songtitel und offizieller Link hier ergänzen.</p></article>
-          <article class="release placeholder reveal"><span class="plus">＋</span><h3>Weitere Produktionen</h3><p>Platz für weitere veröffentlichte Songs und Projekte.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section id="connections">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div><div class="kicker">Von hier bis über den Ozean</div><h2>Connections</h2></div>
-          <p>Internationale und deutsche Hip-Hop-Bezüge übersichtlich präsentieren – mit korrekten Credits und Links zu den jeweiligen Veröffentlichungen.</p>
-        </div>
-        <div class="connections">
-          <article class="connection reveal"><div class="number">01 / WEST COAST</div><h3>Ruhrgebiet × The Bay</h3><p>Der kreative Leitgedanke hinter „From Germany to the Bay“: lokale Wurzeln und ein internationaler musikalischer Blick.</p></article>
-          <article class="connection reveal"><div class="number">02 / DEUTSCHRAP</div><h3>Made in the Pott</h3><p>Ein Bereich für belegte Produktionen, gemeinsame Projekte und offizielle Veröffentlichungen aus der deutschen Rap-Szene.</p></article>
-        </div>
-        <p class="note" style="margin-top:18px">Hinweis: Künstler- und Song-Credits sollten vor Veröffentlichung mit offiziellen Release-Seiten oder anderen belastbaren Nachweisen abgeglichen werden.</p>
-      </div>
-    </section>
-
-    <section id="social">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <div><div class="kicker">Bleib verbunden</div><h2>Follow the movement</h2></div>
-          <p>Verlinke hier deine offiziellen Profile. Nicht verifizierte Profil-URLs sind bewusst nicht erfunden.</p>
-        </div>
-        <div class="socials reveal">
-          <a href="https://www.facebook.com/Ruhrpottrecordz/" target="_blank" rel="noopener noreferrer">Facebook ↗</a>
-          <!-- Ersetze die folgenden allgemeinen Plattform-Links durch deine exakten Profil-URLs. -->
-          <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">YouTube ↗</a>
-          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
-          <a href="https://soundcloud.com/" target="_blank" rel="noopener noreferrer">SoundCloud ↗</a>
-        </div>
-      </div>
-    </section>
-
-    <section style="padding-top:0">
-      <div class="wrap contact-band reveal">
-        <div><div class="kicker">Independent by nature</div><h2>From the Pott.<br>For the world.</h2></div>
-        <a class="btn primary" href="#start">Zurück nach oben ↑</a>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrap footer-inner">
-      <span>© <span id="year">2026</span> Ruhrpott Recordz</span>
-      <span>Independent spirit. Ruhrpott roots.</span>
-    </div>
-  </footer>
-
-  <script>
-    const toggle = document.getElementById('menuToggle');
-    const links = document.getElementById('navLinks');
-    toggle.addEventListener('click', () => {
-      const open = links.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', String(open));
-      toggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
-      toggle.textContent = open ? '×' : '☰';
-    });
-    links.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-      links.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-      toggle.setAttribute('aria-label', 'Menü öffnen');
-      toggle.textContent = '☰';
-    }));
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  </script>
 </body>
 </html>
