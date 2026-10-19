@@ -77,6 +77,7 @@
     .feature-copy h3 { font-size:clamp(2.2rem,4.6vw,4.4rem); line-height:.92; margin:22px 0 16px; text-transform:uppercase; letter-spacing:-.055em; }
     .feature-copy h3 span { color:var(--gold-bright); }
     .feature-copy p { color:#bcb6ab; max-width:460px; }
+    .note { color:#81796b!important; font-size:.8rem; }
     .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center; }
     .portrait { position:relative; }
     .portrait img { width:100%; max-height:640px; object-fit:cover; object-position:center; filter:saturate(.75); }
@@ -87,7 +88,7 @@
     .stat strong { display:block; color:var(--gold-bright); font-size:1.4rem; }
     .stat span { color:var(--muted); font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; }
     .release-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
-    .release { border:1px solid #29251d; background:#101010; transition:transform .25s,border-color .25s; display:flex; flex-direction:column; }
+    .release { border:1px solid #29251d; background:#101010; transition:transform .25s,border-color .25s; }
     .release:hover { transform:translateY(-5px); border-color:var(--gold); }
     .release img { width:100%; aspect-ratio:1/1; object-fit:cover; }
     .release-info { padding:17px; }
@@ -96,25 +97,16 @@
     .release-info p { color:var(--muted); font-size:.82rem; margin:0; }
     .release.placeholder { display:flex; flex-direction:column; justify-content:center; min-height:250px; padding:25px; border-style:dashed; color:var(--muted); }
     .release.placeholder .plus { font-size:2rem; color:var(--gold); }
-    
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-      border-radius: 4px;
-      margin-bottom: 12px;
-      background-color: #000;
-    }
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
+    .production-feature { margin-bottom: 2.5rem; }
+    .production-feature .feature-art img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .video-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; }
+    .video-card { border:1px solid var(--line); background:linear-gradient(145deg,#15130f,#0c0c0c 65%); overflow:hidden; }
+    .video-frame { position:relative; width:100%; aspect-ratio:16/9; background:#050505; }
+    .video-frame iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+    .video-info { padding:18px 20px 21px; }
+    .video-info small { color:var(--gold-bright); letter-spacing:.14em; text-transform:uppercase; font-size:.62rem; font-weight:900; }
+    .video-info h3 { margin:7px 0 5px; text-transform:uppercase; font-size:1.12rem; }
+    .video-info p { color:var(--muted); font-size:.84rem; margin:0; }
     .connections { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
     .connection { border:1px solid #2a2822; padding:25px; background:linear-gradient(135deg,#141414,#0c0c0c); }
     .connection .number { color:var(--gold); font-size:.7rem; letter-spacing:.2em; }
@@ -146,7 +138,8 @@
       .feature,.about-grid { grid-template-columns:1fr; }
       .feature-art,.feature-art img { min-height:0; aspect-ratio:1/1; }
       .about-grid { gap:30px; }
-      .release-grid { grid-template-columns:1fr; }
+      .release-grid { grid-template-columns:repeat(2,1fr); }
+      .video-grid { grid-template-columns:1fr; }
       .contact-band { padding:28px; display:block; }
       .contact-band .btn { margin-top:20px; }
     }
@@ -172,7 +165,7 @@
       <div class="nav-links" id="navLinks">
         <a href="#projekt">Projekt</a>
         <a href="#monroe">Monroe</a>
-        <a href="#releases">Releases</a>
+        <a href="#releases">Videos</a>
         <a href="#connections">Connections</a>
         <a href="#social">Socials</a>
       </div>
@@ -181,7 +174,7 @@
 
   <main>
     <section class="hero" id="start" style="padding:0">
-      <div class="hero-bg"><img src="assets/from-germany-to-the-bay.jpg" alt="From Germany to the Bay – Ruhrpott trifft San Francisco" fetchpriority="high"></div>
+      <div class="hero-bg"><img src="assets/from-germany-to-the-bay.png" alt="From Germany to the Bay – Ruhrpott trifft San Francisco" fetchpriority="high"></div>
       <div class="wrap hero-content">
         <div class="eyebrow">Independent sound • Ruhrgebiet, Deutschland</div>
         <h1>Built in the Pott.<span>Heard worldwide.</span></h1>
@@ -208,11 +201,12 @@
           <p>Eine visuelle Hommage an die Verbindung zwischen dem Ruhrgebiet und der San-Francisco-Bay-Area.</p>
         </div>
         <article class="feature reveal">
-          <div class="feature-art"><img src="assets/from-germany-to-the-bay.jpg" alt="Artwork From Germany to the Bay"></div>
+          <div class="feature-art"><img src="assets/from-germany-to-the-bay.png" alt="Artwork From Germany to the Bay"></div>
           <div class="feature-copy">
             <span class="status">COMING SOON · PROJEKT IN VORBEREITUNG</span>
             <h3>Two coasts.<br><span>One vision.</span></h3>
             <p>Industrieller Ruhrpott-Charakter trifft auf West-Coast-Atmosphäre. Das Artwork steht für ein kommendes Projekt von Ruhrpott Recordz.</p>
+            <p class="note">Noch kein Veröffentlichungstermin und kein Streaming-Link angekündigt.</p>
             <a class="btn secondary" href="#social">Updates verfolgen <span aria-hidden="true">↗</span></a>
           </div>
         </article>
@@ -221,7 +215,7 @@
 
     <section id="monroe">
       <div class="wrap about-grid">
-        <div class="portrait reveal"><img src="assets/monroe-promo.png" alt="Dunkles Promo-Motiv im Hip-Hop-Lifestyle-Stil" onerror="this.onerror=null; this.src='assets/from-germany-to-the-bay.jpg';"></div>
+        <div class="portrait reveal"><img src="assets/monroe-promo.png" alt="Dunkles Promo-Motiv im Hip-Hop-Lifestyle-Stil"></div>
         <div class="about-copy reveal">
           <div class="kicker">Producer / Label Identity</div>
           <h2>Meet<br>Monroe.</h2>
@@ -239,36 +233,33 @@
     <section id="releases">
       <div class="wrap">
         <div class="section-head reveal">
-          <div><div class="kicker">Musik & Produktionen</div><h2>Selected releases</h2></div>
-          <p>Hier können veröffentlichte Tracks, offizielle Cover und direkte Hörlinks ergänzt werden.</p>
+          <div><div class="kicker">Musik & Videos</div><h2>Watch the videos</h2></div>
+          <p>Zwei ausgewählte Videos direkt auf Ruhrpott Recordz ansehen – ohne die Website verlassen zu müssen.</p>
         </div>
-        <div class="release-grid">
-          <article class="release reveal">
-            <img src="assets/from-germany-to-the-bay.jpg" alt="From Germany to the Bay Cover">
-            <div class="release-info"><small>Upcoming project</small><h3>From Germany to the Bay</h3><p>Ruhrpott Recordz · Coming soon</p></div>
+        <div class="section-head reveal" style="margin-top:2.5rem">
+          <div><div class="kicker">Weitere Produktionen</div><h2>Mbnel<br><span style="color:var(--gold-bright)">Forever II</span></h2></div>
+          <p>Ein düsteres, cineastisches Motiv aus dem Ruhrpott-Recordz-Universum.</p>
+        </div>
+        <article class="feature reveal production-feature">
+          <div class="feature-art"><img src="assets/mbnel-forever-ii.png" alt="Mbnel Forever II – Ruhrpott Recordz Artwork"></div>
+          <div class="feature-copy">
+            <span class="status">WEITERE PRODUKTION</span>
+            <h3>Mbnel<br><span>Forever II</span></h3>
+            <p>Ruhrpott-Energie trifft auf nächtliche Großstadt-Atmosphäre. Ein weiteres Motiv aus dem Umfeld von Ruhrpott Recordz.</p>
+          </div>
+        </article>
+        <div class="video-grid">
+          <article class="video-card reveal">
+            <div class="video-frame">
+              <iframe src="https://www.youtube-nocookie.com/embed/02j4K4m6mS0" title="Ruhrpott Recordz – YouTube Video 1" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="video-info"><small>Video 01</small><h3>Ruhrpott Recordz</h3><p>Direkt eingebettetes YouTube-Video</p></div>
           </article>
-          
-          <article class="release placeholder reveal"><span class="plus">＋</span><h3>Dein nächster Release</h3><p>Cover, Artist, Songtitel und offizieller Link hier ergänzen.</p></article>
-          
-          <article class="release reveal" style="padding: 17px;">
-            <small style="color:var(--gold-bright); letter-spacing:.14em; text-transform:uppercase; font-size:.62rem; font-weight:900;">Musikvideos & Features</small>
-            <h3 style="margin:7px 0 14px; text-transform:uppercase; font-size:1.05rem;">Weitere Produktionen</h3>
-            
-            <div style="margin-bottom: 15px;">
-              <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/8loUwMDXM0Q" title="MBNEL - Losing my Mind" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              </div>
-              <p style="font-weight: bold; font-size:0.85rem; margin:0;">MBNEL - Losing my Mind</p>
-              <p style="font-size:0.75rem; color:var(--muted); margin:0;">Produced by Ruhrpott-Recordz</p>
+          <article class="video-card reveal">
+            <div class="video-frame">
+              <iframe src="https://www.youtube-nocookie.com/embed/wqXTPaNg0yk" title="Ruhrpott Recordz – YouTube Video 2" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
-
-            <div>
-              <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/02j4K4m6mS0" title="MBNEL - CLUTCH" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              </div>
-              <p style="font-weight: bold; font-size:0.85rem; margin:0;">MBNEL - CLUTCH</p>
-              <p style="font-size:0.75rem; color:var(--muted); margin:0;">Produced by Ruhrpott-Recordz</p>
-            </div>
+            <div class="video-info"><small>Video 02</small><h3>Ruhrpott Recordz</h3><p>Direkt eingebettetes YouTube-Video</p></div>
           </article>
         </div>
       </div>
@@ -278,12 +269,13 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div><div class="kicker">Von hier bis über den Ozean</div><h2>Connections</h2></div>
-          <p>Internationale und deutsche Hip-Hop-Bezüge übersichtlich präsentieren.</p>
+          <p>Internationale und deutsche Hip-Hop-Bezüge übersichtlich präsentieren – mit korrekten Credits und Links zu den jeweiligen Veröffentlichungen.</p>
         </div>
         <div class="connections">
           <article class="connection reveal"><div class="number">01 / WEST COAST</div><h3>Ruhrgebiet × The Bay</h3><p>Der kreative Leitgedanke hinter „From Germany to the Bay“: lokale Wurzeln und ein internationaler musikalischer Blick.</p></article>
           <article class="connection reveal"><div class="number">02 / DEUTSCHRAP</div><h3>Made in the Pott</h3><p>Ein Bereich für belegte Produktionen, gemeinsame Projekte und offizielle Veröffentlichungen aus der deutschen Rap-Szene.</p></article>
         </div>
+        <p class="note" style="margin-top:18px">Hinweis: Künstler- und Song-Credits sollten vor Veröffentlichung mit offiziellen Release-Seiten oder anderen belastbaren Nachweisen abgeglichen werden.</p>
       </div>
     </section>
 
@@ -291,11 +283,12 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div><div class="kicker">Bleib verbunden</div><h2>Follow the movement</h2></div>
-          <p>Verlinke hier deine offiziellen Profile.</p>
+          <p>Verlinke hier deine offiziellen Profile. Nicht verifizierte Profil-URLs sind bewusst nicht erfunden.</p>
         </div>
         <div class="socials reveal">
           <a href="https://www.facebook.com/Ruhrpottrecordz/" target="_blank" rel="noopener noreferrer">Facebook ↗</a>
-          <a href="https://www.youtube.com/@ruhrpott-recordz/featured" target="_blank" rel="noopener noreferrer">YouTube ↗</a>
+          <!-- Ersetze die folgenden allgemeinen Plattform-Links durch deine exakten Profil-URLs. -->
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">YouTube ↗</a>
           <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
           <a href="https://soundcloud.com/" target="_blank" rel="noopener noreferrer">SoundCloud ↗</a>
         </div>
